@@ -48,6 +48,6 @@ class SettingsController extends Controller
             $darasa->save();
           }
       }
-      return redirect()->back()->with('success', 'Class and streams created successfully');
+      return redirect()->back()->with('flash', 'Class and streams created successfully');
     }
 }

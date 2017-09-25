@@ -30,7 +30,7 @@
                 <td>{{$darasa->stream}}</td>
                 <td>{{$darasa->year}}</td>
                 <td>
-                  <button type="button" rel="tooltip" title="Delete" class="btn btn-danger btn-simple btn-xs">
+                  <button type="button" rel="tooltip" title="Delete" class="btn btn-danger btn-simple btn-xs delete-class">
                     <i class="ti-close"></i>
                   </button>
                 </td>
@@ -55,7 +55,7 @@
 					{!! Form::open(['url' => 'setting/classes', 'method' => 'POST']) !!}
 
 						<div class="form-group{{ $errors->has('year') ? ' has-error' : '' }}">
-							<label class="control-label">Year <star>*</star></label>
+							<label class="control-label">Year *</label>
 
 							{!! Form::text('year',$year,['class'=>'form-control','placeholder'=>'Year']) !!}
 
@@ -67,7 +67,7 @@
 					</div>
 
 					<div class="form-group{{ $errors->has('name_form') ? ' has-error' : '' }}">
-						<label class="control-label">Form/Class <star>*</star></label>
+						<label class="control-label">Form/Class *</label>
 						<select name="name_form" id="name_form" class="form-control selectpicker" style="width: 100%;">
 							<option value="" selected disabled> Select Form </option>
 							@foreach($vidato as $kidato)
@@ -84,7 +84,7 @@
 							@endif
 					</div>
 					<div class="form-group{{ $errors->has('stream') ? ' has-error' : '' }}">
-						<label class="control-label">Stream <star>*</star></label>
+						<label class="control-label">Stream *</label>
 						{!! Form::select('stream[]', ['A'=>'A', 'B'=>'B', 'C'=>'C', 'D'=>'D', 'E'=>'E', 'F'=>'F'], null , ['class'=>'selectpicker form-control','multiple'=>'multiple', 'title'=>'Select Streams','data-style'=>'select-with-transition']); !!}
 
 							@if ($errors->has('stream'))
@@ -94,7 +94,7 @@
 							@endif
 					</div>
 					<div class="category form-category">
-						<star>*</star> Required fields</div>
+						<span class="text-danger">*</span> Required fields</div>
 					<div class="text-center">
 						<button type="submit" class="btn btn-rose btn-fill btn-wd">Register</button>
 					</div>

@@ -52,23 +52,23 @@ class User extends Authenticatable
             return $this->belongsToMany('App\Form', 'teacher_subjects');
         }
 
-    /**
-     *Formated date
-     * @param $column
-     * @return null|string
-     */
-    protected function getFormattedDateAttribute($column){
-        if ($this->attributes[$column]) {
-            return Carbon::parse($this->attributes[$column])->diffForHumans();
-        }
-        return null;
-    }
+    // /**
+    //  *Formated date
+    //  * @param $column
+    //  * @return null|string
+    //  */
+    // protected function getFormattedDateAttribute($column){
+    //     if ($this->attributes[$column]) {
+    //         return Carbon::parse($this->attributes[$column])->diffForHumans();
+    //     }
+    //     return null;
+    // }
 
-    /**
-     * @return null|string
-     */
-    public function getFormattedCreatedAtAttribute() {
-        return $this->getFormattedDateAttribute("created_at");
-    }
+    // /**
+    //  * @return null|string
+    //  */
+    // public function getFormattedCreatedAtAttribute() {
+    //     return $this->getFormattedDateAttribute("created_at");
+    // }
 
 }
