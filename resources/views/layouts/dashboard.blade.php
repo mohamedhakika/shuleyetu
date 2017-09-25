@@ -16,6 +16,8 @@
     <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-muli.css') }}" rel="stylesheet">
     <link href="{{ asset('css/themify-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/datepicker3.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/sweetalert2.min.css') }}" rel="stylesheet">
 </head>
 <body>
   <div id="app">
@@ -28,13 +30,13 @@
         </div>
         <div class="logo logo-mini">
           <a href="#" class="simple-text">
-            SIS
+            RMS
           </a>
         </div>
         <div class="sidebar-wrapper">
           <ul class="nav">
-            <li class="active">
-              <a href="../index.html">
+            <li class="{{ Request::path() == 'home' ? 'active' : '' }}">
+              <a href="{{ url('/home') }}">
                 <i class="ti-panel"></i>
                 <p>Dashboard</p>
               </a>
@@ -45,6 +47,24 @@
                 <p>Magumashi mengine</p>
               </a>
             </li>
+            <li class="{{ Request::is('setting/classes') ? 'active' : '' }}">
+						<a data-toggle="collapse" href="#settings" class="collapsed" aria-expanded="false">
+							<i class="ti-settings"></i>
+							<p>Settings
+								<b class="caret"></b>
+							</p>
+						</a>
+						<div class="collapse" id="settings" role="navigation" aria-expanded="false" style="height: 0px;">
+							<ul class="nav">
+								<li class="{{ Request::path() == 'setting/classes' ? 'active' : '' }}">
+									<a href="{{ route('setting.classes') }}">Classes & Forms</a>
+								</li>
+								<li>
+									<a href="charts/flot-charts.html">Flot</a>
+								</li>
+							</ul>
+						</div>
+					</li>
           </ul>
         </div>
       </div>
@@ -63,9 +83,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <!-- Branding Image -->
-              <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'School') }}
+              <!-- Page tittle -->
+              
+              <a class="navbar-brand" href="#">
+                  @yield('page-heading')
               </a>
             </div>
             <div class="collapse navbar-collapse">
@@ -120,5 +141,24 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/perfect-scrollbar.jquery.min.js') }}"></script>
     <script src="{{ asset('js/school.js') }}"></script>
+    <script src="{{ asset('js/datepicker3.js') }}"></script>
+    <script src="{{ asset('js/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('js/select-bootstrap.js') }}"></script>
+
+    <script>
+      $(document).ready(function() {
+        $('.datepicker').datepicker({
+          autoclose: true,
+          startView: 2,
+          format: "yyyy-mm-dd"
+        });
+      });
+      window.setTimeout(function() {
+        $(".potea").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove();
+        });
+      }, 4000);
+    </script>
+    @yield('javascript')
 </body>
 </html>

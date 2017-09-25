@@ -1,5 +1,8 @@
 @extends('layouts.dashboard')
 
+@section('page-heading')
+    Dashboard
+@endsection
 @section('content')
 <div class="container-fluid">
     @role('admin')
