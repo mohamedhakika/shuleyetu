@@ -21,7 +21,7 @@
                 this.flash(this.message);
             }
 
-            window.event.$on('flash', message => {
+            window.events.$on('flash', message => {
                 this.flash(message);
             });
         },

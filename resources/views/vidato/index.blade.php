@@ -30,9 +30,13 @@
                 <td>{{$darasa->stream}}</td>
                 <td>{{$darasa->year}}</td>
                 <td>
-                  <button type="button" rel="tooltip" title="Delete" class="btn btn-danger btn-simple btn-xs delete-class">
+									<form role="form" method="POST" action="{{ route('classes.destroy',$darasa->id) }}">
+											{{ csrf_field() }}
+											{{ method_field('DELETE') }}
+											<button type="button" value="submit" rel="tooltip" title="Delete" class="btn btn-danger btn-simple btn-xs delete-class">
                     <i class="ti-close"></i>
                   </button>
+									</form>
                 </td>
               </tr>
             @endforeach

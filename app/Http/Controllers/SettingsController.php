@@ -21,7 +21,7 @@ class SettingsController extends Controller
         $this->middleware('auth');
     }
 
-    public function getclass()
+    public function getClass()
     {
       $year = Carbon::now()->year;
       $vidato = Kidato::all('id', 'name');
@@ -30,7 +30,7 @@ class SettingsController extends Controller
                                     'classes' => $classes]);
     }
 
-    public function setclass(VidatoRequest $request)
+    public function setClass(VidatoRequest $request)
     {
       foreach ($request->input('stream') as $stream) {
           $ipo = Darasa::where([
@@ -49,5 +49,9 @@ class SettingsController extends Controller
           }
       }
       return redirect()->back()->with('flash', 'Class and streams created successfully');
+    }
+
+    public function destroyClass($id){ 
+        return redirect()->back()->with('flash', 'Class deleted succesfully.');
     }
 }

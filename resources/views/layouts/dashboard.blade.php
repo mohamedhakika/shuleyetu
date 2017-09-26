@@ -37,7 +37,7 @@
           <ul class="nav">
             <li class="{{ Request::path() == 'home' ? 'active' : '' }}">
               <a href="{{ url('/home') }}">
-                <i class="ti-panel"></i>
+                <i class="fa fa-dashboard"></i>
                 <p>Dashboard</p>
               </a>
             </li>
@@ -57,7 +57,7 @@
 						<div class="collapse" id="settings" role="navigation" aria-expanded="false" style="height: 0px;">
 							<ul class="nav">
 								<li class="{{ Request::is('setting/classes') ? 'active' : '' }}">
-									<a href="{{ route('setting.classes') }}">Classes & Forms</a>
+									<a href="{{ route('setting.classes') }}"><i class="fa fa-book"></i> Classes & Forms</a>
 								</li>
 								<li>
 									<a href="charts/flot-charts.html">Flot</a>
@@ -154,7 +154,9 @@
           format: "yyyy-mm-dd"
         });
 
-        $('.delete-class').on('click', function(){
+        $('.delete-class').on('click', function(e){
+          e.preventDefault();
+          var form = $(this).parents('form');
           swal({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -165,15 +167,7 @@
             confirmButtonText: 'Yes, delete it!',
             buttonsStyling: false
           }).then(function() {
-            swal({
-              title: 'Deleted!',
-              text: 'Your file has been deleted.',
-              type: 'success',
-              confirmButtonClass: "btn btn-success",
-              timer: 2000,
-            	showConfirmButton: false,
-              buttonsStyling: false
-            }).catch(swal.noop);
+            form.submit();
           },function(dismiss){
             
           });

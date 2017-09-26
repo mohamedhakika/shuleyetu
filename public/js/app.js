@@ -42448,7 +42448,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.flash(this.message);
         }
 
-        window.event.$on('flash', function (message) {
+        window.events.$on('flash', function (message) {
             _this.flash(message);
         });
     },
