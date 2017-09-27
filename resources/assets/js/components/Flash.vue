@@ -1,8 +1,8 @@
 <template>
-    <div class="alert alert-info alert-flash" role="alert" v-show="show">
-        <span class="lead">
+    <div class="alert alert-success col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 alert-flash" role="alert" v-show="show">
+        <p>
         <strong> Success - </strong> {{ body }}
-        </span>
+        </p>
     </div>
 </template>
 
@@ -35,7 +35,7 @@
             },
             hide(){
                 setTimeout(() => {
-                    this.show = false;
+                   this.show = false;
                 }, 5000);
             }
         }
@@ -45,7 +45,8 @@
 <style>
     .alert-flash {
         position: fixed;
-        right: 25px;
-        bottom: 25px;
+        z-index: 999;
+        margin-top: 4%;
+        top: 0;
     }
 </style>

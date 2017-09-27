@@ -25,7 +25,9 @@ class SettingsController extends Controller
     {
       $year = Carbon::now()->year;
       $vidato = Kidato::all('id', 'name');
-      $classes = Darasa::where('year', $year)->get();
+      $classes = Darasa::where('year', $year)
+                    ->orderBy('name')
+                    ->orderBy('stream')->get();
       return view('vidato.index', ['vidato' => $vidato, 'year' => $year,
                                     'classes' => $classes]);
     }

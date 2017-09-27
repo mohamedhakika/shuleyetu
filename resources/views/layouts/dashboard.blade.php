@@ -144,6 +144,7 @@
     <script src="{{ asset('js/school.js') }}"></script>
     <script src="{{ asset('js/datepicker3.js') }}"></script>
     <script src="{{ asset('js/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-notify.js') }}"></script>
     <script src="{{ asset('js/select-bootstrap.js') }}"></script>
 
     <script>
@@ -170,6 +171,20 @@
             form.submit();
           },function(dismiss){
             
+          });
+        });
+        $(".notify-me").on('click', function(){
+          $.notify({
+              icon: "notifications",
+              message: "Welcome to <b>Material Dashboard</b> - a beautiful freebie for every web developer."
+
+          },{
+              type: "success",
+              timer: 3000,
+              placement: {
+                  from: "top",
+                  align: "center"
+              }
           });
         });
       });

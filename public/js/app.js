@@ -41980,7 +41980,7 @@ exports = module.exports = __webpack_require__(39)(undefined);
 
 
 // module
-exports.push([module.i, "\n.alert-flash {\n    position: fixed;\n    right: 25px;\n    bottom: 25px;\n}\n", ""]);
+exports.push([module.i, "\n.alert-flash {\n    position: fixed;\n    z-index: 999;\n    margin-top: 4%;\n    top: 0;\n}\n", ""]);
 
 // exports
 
@@ -42485,11 +42485,12 @@ var render = function() {
       directives: [
         { name: "show", rawName: "v-show", value: _vm.show, expression: "show" }
       ],
-      staticClass: "alert alert-info alert-flash",
+      staticClass:
+        "alert alert-success col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 alert-flash",
       attrs: { role: "alert" }
     },
     [
-      _c("span", { staticClass: "lead" }, [
+      _c("p", [
         _c("strong", [_vm._v(" Success - ")]),
         _vm._v(" " + _vm._s(_vm.body) + "\n    ")
       ])
