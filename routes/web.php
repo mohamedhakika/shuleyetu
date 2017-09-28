@@ -37,3 +37,6 @@ Route::post('/setting/subjects', 'SubjectController@store')->name('setting.subje
 Route::get('/setting/subjects/{id}/edit', 'SubjectController@edit')->name('subjects.edit')->middleware(['role:admin']);
 Route::patch('/setting/subjects/{id}', 'SubjectController@update')->name('subjects.update')->middleware(['role:admin']);
 Route::delete('/setting/subjects/{id}', 'SubjectController@destroy')->name('subjects.destroy')->middleware(['role:admin']);
+
+Route::view('/profile/user', 'profile.index')->middleware('auth');
+Route::patch('/profile/{id}', 'ProfileController@update')->name('profile.password');
