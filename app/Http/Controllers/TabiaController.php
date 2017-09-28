@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Tabia;
+use Auth;
 
 class TabiaController extends Controller
 {
@@ -61,6 +62,7 @@ class TabiaController extends Controller
         $tabia = new Tabia();
         $tabia->codeID = $request->get('codeID');
         $tabia->name = $request->get('name');
+        $tabia->created_by = Auth::user()->id;
         $tabia->save();
         return redirect()->back()->with('flash', 'Assesment created successfully.');
     }
@@ -104,6 +106,7 @@ class TabiaController extends Controller
         $tabia = $this->tabia->find($id);
         $tabia->codeID = $request->get('codeID');
         $tabia->name = $request->get('name');
+        $tabia->updated_by = Auth::user()->id;
         $tabia->update();
         return redirect()
             ->route('setting.assessment')

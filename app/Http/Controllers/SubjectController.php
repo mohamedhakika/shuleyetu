@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Subject;
+use App\Kidato;
 use Auth;
 use App\Http\Requests\CreateSubjectRequest;
 use App\Http\Requests\UpdateSubjectRequest;
@@ -35,11 +36,16 @@ class SubjectController extends Controller
      */
     public function index(Request $request)
     {
-        $subjects = $this->subject->orderBy('id','DESC')->paginate(10);
-        $osubjects = $this->subject->where('level', '=', '0')->orderBy('id', 'DESC')->paginate(10);
-        $asubjects = $this->subject->where('level', '=', '1')->orderBy('id', 'DESC')->paginate(10);
-        return view('subjects.index',compact('subjects', 'osubjects', 'asubjects'))
-            ->with('i', ($request->input('page', 1) - 1) * 10);
+        $subjects_1 = $this->subject->where('vidato_id', 1)
+                                ->orderBy('name')->get();
+        $subjects_2 = $this->subject->where('vidato_id', 2)
+                                ->orderBy('name')->get();
+        $subjects_3 = $this->subject->where('vidato_id', 3)
+                                ->orderBy('name')->get();
+        $subjects_4 = $this->subject->where('vidato_id', 4)
+                                ->orderBy('name')->get();
+        return view('subjects.index',
+                    compact('subjects_1', 'subjects_2', 'subjects_3', 'subjects_4'));
     }
 
     /**
@@ -49,7 +55,8 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        //
+        $vidato = Kidato::all('id', 'name');
+        return view('subjects.create', compact('vidato'));
     }
 
     /**
@@ -60,15 +67,22 @@ class SubjectController extends Controller
      */
     public function store(CreateSubjectRequest $request)
     {
-        $subject = $this->subject->create([
-            'name' => $request->name,
-            'level' => $request->level,
-            'created_by' => Auth::user()->id,
-            'updated_by' => Auth::user()->id,
-            ]);
-
-        return redirect()->route('subjects.index')
-                        ->with('success','Subject created successfully');
+        foreach ($request->input('vidato_id') as $vidato) {
+            $ipo = Subject::where([
+                  ['name','=', $request->get('name')],
+                  ['vidato_id','=', $vidato],
+                  ])->first();
+            if(!$ipo){
+                $subject = new Subject();
+                $subject->name = $request->get('name');
+                $subject->vidato_id = $vidato;
+                $subject->level = '0';
+                $subject->created_by = Auth::user()->id;
+                $subject->save();
+            }
+        }
+        return redirect()->back()
+                        ->with('flash','Subject created successfully');
     }
 
     /**
@@ -102,17 +116,19 @@ class SubjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSubjectRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $subject = $this->subject->find($id);
-        $subject->update([
-            'name' => $request->name,
-            'level' => $request->level,
-            'updated_by' => Auth::user()->id,
-            ]);
+        $request->validate([
+            'name' => 'required|unique_with:subjects,name,'.$id,
+        ]);
 
-        return redirect()->route('subjects.index')
-                        ->with('success','Subject updated successfully');
+        $subject = $this->subject->find($id);
+        $subject->name = $request->get('name');
+        $subject->updated_by = Auth::user()->id;
+        $subject->update();
+
+        return redirect()->route('setting.subjects')
+                        ->with('flash','Subject updated successfully');
     }
 
     /**
@@ -124,7 +140,7 @@ class SubjectController extends Controller
     public function destroy($id)
     {
         $this->subject->find($id)->delete();
-        return redirect()->route('subjects.index')
-                        ->with('success','Subject deleted successfully');
+        return redirect()->route('setting.subjects')
+                        ->with('flash','Subject deleted successfully');
     }
 }

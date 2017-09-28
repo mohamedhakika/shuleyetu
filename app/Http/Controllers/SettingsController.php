@@ -53,7 +53,10 @@ class SettingsController extends Controller
       return redirect()->back()->with('flash', 'Class and streams created successfully');
     }
 
-    public function destroyClass($id){ 
+    public function destroyClass($id)
+    { 
+        $darasa = Darasa::find($id);
+        $darasa->delete();
         return redirect()->back()->with('flash', 'Class deleted succesfully.');
     }
 }

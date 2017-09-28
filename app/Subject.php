@@ -11,12 +11,20 @@ class Subject extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'level', 'created_by', 'updated_by',
-    ];
+    // protected $fillable = [
+    //     'name', 'level', 'created_by', 'updated_by',
+    // ];
 
-    public function teacherForms()
+    public function kidato()
     {
-        return $this->belongsToMany('App\Form', 'teacher_subjects')->withPivot('id', 'year', 'created_by');
+        return $this->belongsTo('App\Kidato', 'vidato_id');
+    }
+
+    public function updatedBy(){
+        return $this->belongsTo('App\User', 'updated_by');
+    }
+
+    public function createdBy(){
+        return $this->belongsTo('App\User', 'created_by');
     }
 }

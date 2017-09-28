@@ -24,8 +24,8 @@ class CreateSubjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique_with:subjects,level',
-            'level' => 'required',
+            'name' => 'required',
+            'vidato_id' => 'required',
         ];
     }
 
@@ -37,9 +37,8 @@ class CreateSubjectRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Name field is required',
-            'name.unique_with' => 'This subject exists',
-            'level.required' => 'Level field is required',
+            'name.required' => 'Subject name is required',
+            'vidato_id.required' => 'Form is required',
         ];
     }
 }

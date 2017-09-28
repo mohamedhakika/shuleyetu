@@ -57,10 +57,13 @@
 						<div class="collapse" id="settings" role="navigation" aria-expanded="false" style="height: 0px;">
 							<ul class="nav">
 								<li class="{{ Request::is('setting/classes') ? 'active' : '' }}">
-									<a href="{{ route('setting.classes') }}"><i class="fa fa-book"></i> Classes & Forms</a>
+									<a href="{{ route('setting.classes') }}"> Classes & Forms</a>
 								</li>
                 <li class="{{ Request::is('setting/assessment') ? 'active' : '' }}">
-									<a href="{{ route('setting.assessment') }}"><i class="ti-notepad"></i> Assessments</a>
+									<a href="{{ route('setting.assessment') }}"> Assessments</a>
+								</li>
+                <li class="{{ Request::is('setting/subjects') ? 'active' : '' }}">
+									<a href="{{ route('setting.subjects') }}"> Subjects</a>
 								</li>
 								<li>
 									<a href="charts/flot-charts.html">Flot</a>

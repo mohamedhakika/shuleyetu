@@ -106,11 +106,6 @@
 					{!! Form::close() !!}
 				</div>
 			</div>
-
-			<div class="col-md-4">
-					<button class="btn btn-primary btn-block notify-me">Top Center</button>
-			</div>
-
 		</div>
 	</div>
 </div>
