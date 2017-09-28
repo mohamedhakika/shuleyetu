@@ -59,6 +59,9 @@
 								<li class="{{ Request::is('setting/classes') ? 'active' : '' }}">
 									<a href="{{ route('setting.classes') }}"><i class="fa fa-book"></i> Classes & Forms</a>
 								</li>
+                <li class="{{ Request::is('setting/assessment') ? 'active' : '' }}">
+									<a href="{{ route('setting.assessment') }}"><i class="ti-notepad"></i> Assessments</a>
+								</li>
 								<li>
 									<a href="charts/flot-charts.html">Flot</a>
 								</li>
