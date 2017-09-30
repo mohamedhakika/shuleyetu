@@ -69,9 +69,10 @@ class StudentController extends Controller
      */
     public function o_create()
     {
-        $today = Carbon::now();
-        $year = $today->year;
-        $classes = Darasa::where('year', $year)->where('level', '0')->get();
+        $year = Carbon::now()->year;
+        $classes = Darasa::where('year', $year)->where('level', '0')
+                                ->orderBy('name')
+                                ->orderBy('stream')->get();
         $level='O-Level';
         $roles = Role::all('id', 'display_name')->where('display_name', '=', 'Student');
 
@@ -148,7 +149,7 @@ class StudentController extends Controller
             ]);
         });
 
-        return back()->with('success','Student ('.$request->get('first_name').' '. $request->get('last_name').') registered successfully');
+        return back()->with('flash','Student ('.$request->get('first_name').' '. $request->get('last_name').') registered successfully');
 
     }
 
@@ -368,8 +369,8 @@ class StudentController extends Controller
             ]);
         });
 
-        return redirect()->route('olevel.show',$id)
-        ->with('success','Student ('.$request->get('name').') updated successfully');
+        return redirect()->route('students.o-level')
+        ->with('flash','Student ('.$request->get('first_name').' '. $request->get('last_name').') updated successfully');
     }
 
     public function a_update(UpdateAlStudentRequest $request, $id, $userId)
@@ -431,6 +432,32 @@ class StudentController extends Controller
             'password' => $password,
         ]);
         return redirect()->route('olevel.show',$id)
-        ->with('success','Student password reset successfully');
+        ->with('flash','Student password reset successfully');
     }
+
+    /**
+     * Change student image.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function profileImage(Request $request, $id){
+        $request->validate([
+            'profileimg' => 'required|image|mimes:jpg,png,jpeg|max:200',
+        ]);
+
+        $image = $request->file('profileimg');
+        $image_name = time().'.'.$image->getClientOriginalExtension();
+        $image->move('avatars', $image_name);
+        
+        $path = 'avatars/'.$image_name;
+        $student = $this->student->find($id);
+        if(! $student){
+            \App::abort('409');
+        }
+        $student->thumbnail = $path;
+        $student->update();
+       
+        return back()->with('flash', 'Photo changed successfully');
+     }
 }

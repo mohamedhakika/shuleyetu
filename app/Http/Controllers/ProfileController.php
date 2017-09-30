@@ -89,7 +89,7 @@ class ProfileController extends Controller
           $obj_user->password = Hash::make($request['password']);
           $obj_user->update();
           Auth::logout();
-          return redirect()->route('login')->with('flash', 'Password changed successfully, please login with new password');
+          return redirect()->route('login')->with('success', 'Password changed successfully, please login with new password');
         }else{
           $errors = array('old_password' => 'Current password is incorect');
           return redirect()
@@ -108,4 +108,5 @@ class ProfileController extends Controller
     {
         //
     }
+
 }

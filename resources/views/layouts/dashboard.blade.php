@@ -41,12 +41,24 @@
                 <p>Dashboard</p>
               </a>
             </li>
-            <li>
-              <a href="../bosss.html">
-                <i class="ti-panel"></i>
-                <p>Magumashi mengine</p>
-              </a>
-            </li>
+            <li class="{{ Request::is('students/*') ? 'active' : '' }}">
+						<a data-toggle="collapse" href="#students" class="collapsed" aria-expanded="false">
+							<i class="fa fa-graduation-cap"></i>
+							<p>Students
+								<b class="caret"></b>
+							</p>
+						</a>
+						<div class="collapse" id="students" role="navigation" aria-expanded="false" style="height: 0px;">
+							<ul class="nav">
+								<li class="{{ Request::is('students/o-level') ? 'active' : '' }}">
+									<a href="{{ route('students.o-level') }}"> O-Level</a>
+								</li>
+                <li class="{{ Request::is('students/a-level') ? 'active' : '' }}">
+									<a href="{{ route('students.a-level') }}"> A-Level</a>
+								</li>
+							</ul>
+						</div>
+					</li>
             <li class="{{ Request::is('setting/*') ? 'active' : '' }}">
 						<a data-toggle="collapse" href="#settings" class="collapsed" aria-expanded="false">
 							<i class="ti-settings"></i>
@@ -64,9 +76,6 @@
 								</li>
                 <li class="{{ Request::is('setting/subjects') ? 'active' : '' }}">
 									<a href="{{ route('setting.subjects') }}"> Subjects</a>
-								</li>
-								<li>
-									<a href="charts/flot-charts.html">Flot</a>
 								</li>
 							</ul>
 						</div>
@@ -118,6 +127,12 @@
                           {{ csrf_field() }}
                         </form>
                       </li>
+                      <li> 
+                        <a href="{{ route('profile.user') }}">
+                          <i class="ti-user"></i>
+                          My Profile
+                        </a>
+                      </li>
                     </ul>
                   </li>
                 @endguest
@@ -148,10 +163,12 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/perfect-scrollbar.jquery.min.js') }}"></script>
     <script src="{{ asset('js/school.js') }}"></script>
+    <script src="{{ asset('js/checkbox-radio.js') }}"></script>
     <script src="{{ asset('js/datepicker3.js') }}"></script>
     <script src="{{ asset('js/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap-notify.js') }}"></script>
     <script src="{{ asset('js/select-bootstrap.js') }}"></script>
+    <script src="{{ asset('js/upload-bootstrap.min.js') }}"></script>
 
     <script>
       $(document).ready(function() {

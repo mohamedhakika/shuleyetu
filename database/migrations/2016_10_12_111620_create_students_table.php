@@ -23,7 +23,7 @@ class CreateStudentsTable extends Migration
             $table->string('mobile_no');
             $table->date('dob');
             $table->integer('year_admitted');
-            $table->string('thumbnail');
+            $table->string('thumbnail')->nullable();
             $table->enum('status', [0, 1]);
             $table->enum('level', [0, 1]);
             $table->integer('created_by')->unsigned()->nullable();

@@ -96,9 +96,9 @@
 											<a href="{{ route('subjects.edit',$subject->id) }}" rel="tooltip" title="Edit subject name" class="btn btn-success btn-simple btn-xs">
 												<i class="ti-pencil-alt"></i>
 											</a>
-											<button type="button" value="submit" rel="tooltip" title="Delete subject" class="btn btn-danger btn-simple btn-xs delete-class">
-                    <i class="ti-close"></i>
-                  </button>
+                      <button type="button" value="submit" rel="tooltip" title="Delete subject" class="btn btn-danger btn-simple btn-xs delete-class">
+                        <i class="ti-close"></i>
+                      </button>
 									</form>
                 </td>
               </tr>

@@ -9,7 +9,11 @@
 		<div class="col-lg-8 col-lg-offset-2 col-md-12">
 			<div class="card" style="min-height: 400px">
 				<div class="header">
-					<h4 class="title">New Subject</h4>
+					<h4 class="title">New Subject 
+					<a href="{{ route('setting.subjects') }}" class="btn btn-primary btn-fill pull-right">
+						<i class="fa fa-list"></i> View subjects list
+					</a>
+					</h4>
 				</div>
 				<div class="content">
 					{!! Form::open(['url' => 'setting/subjects', 'method' => 'POST']) !!}

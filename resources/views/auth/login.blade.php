@@ -49,6 +49,9 @@
                             </div>
                             <div class="content">
                                 <div class="social-line text-center">
+                                    @if($message = Session::get('success'))
+                                        <p class='text-warning potea'> {{ $message }} </p>
+                                    @endif
                                     <h5>Welcome Back</h5>
                                     <br>
                                 </div>
