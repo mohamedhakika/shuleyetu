@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('page-heading')
-    User Profile
+    Student profile
 @endsection
 @section('content')
 <div class="container-fluid">
@@ -9,11 +9,18 @@
     <div class="col-md-4">
       <div class="card card-user">
         <div class="author">
-          <a href="#avata">
-            <img class="img avatar" src="{{ asset('img/avatar.png') }}" />
+          <a href="#profile">
+          @if(is_null($student->thumbnail))
+            <img class="img avatar" src="{{ asset('img/avatar.png') }}" alt="Profile Image">
+          @else
+            <img class="img avatar" src="{{ asset($student->thumbnail) }}" alt="Profile Image">
+          @endif
           </a>
         </div>
         <div class="content">
+          @php
+            $this_year = date('Y');
+          @endphp
           @foreach(Auth::user()->roles as $role)
             <h6 class="category text-gray">
                 {{ $role->display_name }}
@@ -21,11 +28,32 @@
           @endforeach
           <h4 class="title" style="text-transform:capitalize;">{{ Auth::user()->name }}</h4>
           <p class="description">
-            @foreach(Auth::user()->roles as $role)
-              {{ $role->description }}
+            @foreach($student->forms as $form)
+              @if($this_year == $form->pivot->year)
+                {{ $form->name }} - {{ $form->stream }}
+              @endif
             @endforeach
           </p>
           <a href="#avata" class="btn btn-rose btn-round">Follow</a>
+        </div>
+      </div>
+      <div class="card" style="min-height: 100px">
+        <div class="header">
+          <h4 class="title"><i class="ti-angle-double-right text-info"></i>  Forms and year</h4>
+        </div>
+        <div class="content table-responsive">
+          <table class="table">
+            <thead>
+            </thead>
+            <tbody>
+              @foreach($student->forms as $form)
+              <tr class="{{ $form->pivot->year == $this_year ? 'active' : '' }}">
+                <td><strong><i class="ti-notepad text-info"></i> {{ $form->name }} - {{$form->stream}}</strong></td>
+                <td><span class="label label-default pull-right">{{ $form->pivot->year }}</span></td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

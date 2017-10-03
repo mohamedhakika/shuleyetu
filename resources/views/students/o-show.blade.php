@@ -12,8 +12,8 @@
 					<h4 class="title"><i class="ti-user"></i>  <b>{{ $student->user->name }}</b> Details
 					
           <div class="btn-group pull-right">
-            <a href="{{route('olevel.edit',$student->id)}}" class="btn btn-white"><i class="fa fa-pencil-square-o"></i> Edit Details </a>
-            <a href="{{route('password.reset',$student->id)}}" class="btn btn-primary"><i class="fa fa-lock"></i> Reset Password </a>
+            <a href="{{route('olevel.edit',$student->id)}}" class="btn btn-white"><i class="ti-pencil-alt"></i> Edit Details </a>
+            <a href="{{route('password.reset',$student->id)}}" class="btn btn-primary"><i class="ti-lock"></i> Reset Password </a>
             <a href="{{route('students.o-level')}}" class="btn btn-info"><i class="fa fa-mail-reply"></i> Back </a>
           </div>
 					</h4>

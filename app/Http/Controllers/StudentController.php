@@ -395,9 +395,11 @@ class StudentController extends Controller
         if(!$user){
             \App::abort('409');
         }
+        //detach role to the user created
+        $user->detachRole('student');
         $user->delete();
-        return redirect()->route('olevel.index')
-                        ->with('success','Student deleted successfully');
+        return redirect()->route('students.o-level')
+                        ->with('flash','Student deleted successfully');
     }
 
     /**
@@ -441,7 +443,8 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function profileImage(Request $request, $id){
+    public function profileImage(Request $request, $id)
+    {
         $request->validate([
             'profileimg' => 'required|image|mimes:jpg,png,jpeg|max:200',
         ]);
@@ -459,5 +462,22 @@ class StudentController extends Controller
         $student->update();
        
         return back()->with('flash', 'Photo changed successfully');
+     }
+    
+     /**
+     * Student profile.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+     public function my_profile($id)
+     {
+        $student = $this->student->with('user', 'forms', 'addedBy')->where('user_id', $id)->first();
+        if(! $student){
+            \App::abort('409');
+        }
+
+        return view('students.profile',compact('student'));
+
      }
 }

@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'welcome');
+
 Route::view('dashboard', 'index');
 Route::view('/loginpage', 'auth/loginpage');
 Auth::routes();
@@ -40,18 +39,30 @@ Route::delete('/setting/subjects/{id}', 'SubjectController@destroy')->name('subj
 
 Route::view('/profile/user', 'profile.index')->name('profile.user')->middleware('auth');
 Route::patch('/profile/{id}', 'ProfileController@update')->name('profile.password');
+Route::get('/profile/{id}/user', 'ProfileController@password_reset')->name('user.reset.password')->middleware(['role:admin']);
+Route::patch('/profile/user/{id}', 'ProfileController@passwordReset')->name('resets.password')->middleware(['role:admin']);
 
 //students routes o-level
+Route::get('/students/my-profile/{id}', 'StudentController@my_profile')->name('students.my_profile');
 Route::get('/students/o-level', 'StudentController@o_index')->name('students.o-level')->middleware(['role:admin']);
 Route::get('/students/o-level/create', 'StudentController@o_create')->name('olevel.create')->middleware(['role:admin']);
 Route::post('/students/o-level', 'StudentController@o_store')->name('olevel.store')->middleware(['role:admin']);
 Route::get('/students/o-level/{id}/show', 'StudentController@o_show')->name('olevel.show')->middleware(['role:admin']);
 Route::get('/students/o-level/{id}/edit', 'StudentController@o_edit')->name('olevel.edit')->middleware(['role:admin']);
 Route::patch('/students/o-level/{id}/{userId}', 'StudentController@o_update')->name('olevel.update')->middleware(['role:admin']);
-Route::delete('/students/o-level', 'StudentController@o_destroy')->name('olevel.destroy')->middleware(['role:admin']);
+Route::delete('/students/o-level/{id}', 'StudentController@destroy')->name('olevel.destroy')->middleware(['role:admin']);
 Route::get('/students/password/{id}/reset', 'StudentController@password_reset')->name('password.reset')->middleware(['role:admin']);
 Route::patch('/students/reset/{id}/{userId}', 'StudentController@passwordReset')->name('reset.password')->middleware(['role:admin']);
 Route::patch('/students/profile/{id}', 'StudentController@profileImage')->name('students.profile')->middleware(['role:admin']);
 
 //students routes a-level
 Route::get('/students/a-level', 'StudentController@a_index')->name('students.a-level')->middleware(['role:admin']);
+
+//staff routes
+Route::get('/staff/teachers', 'TeacherController@index')->name('teachers.index')->middleware(['role:admin']);
+Route::get('/staff/teachers/create', 'TeacherController@create')->name('teachers.create')->middleware(['role:admin']);
+Route::post('/staff/teachers', 'TeacherController@store')->name('teachers.store')->middleware(['role:admin']);
+Route::get('/staff/teachers/{id}/show', 'TeacherController@show')->name('teachers.show')->middleware(['role:admin']);
+Route::get('/staff/teachers/{id}/edit', 'TeacherController@edit')->name('teachers.edit')->middleware(['role:admin']);
+Route::patch('/staff/teachers/{id}/{userId}', 'TeacherController@update')->name('teachers.update')->middleware(['role:admin']);
+Route::delete('/staff/teachers/{id}', 'TeacherController@destroy')->name('teachers.destroy')->middleware(['role:admin']);

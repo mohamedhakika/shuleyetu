@@ -59,7 +59,28 @@
 							</ul>
 						</div>
 					</li>
-            <li class="{{ Request::is('setting/*') ? 'active' : '' }}">
+          <li class="{{ Request::is('staff/*') ? 'active' : '' }}">
+						<a data-toggle="collapse" href="#staff" class="collapsed" aria-expanded="false">
+							<i class="ti-user"></i>
+							<p>Staff
+								<b class="caret"></b>
+							</p>
+						</a>
+						<div class="collapse" id="staff" role="navigation" aria-expanded="false" style="height: 0px;">
+							<ul class="nav">
+								<li class="{{ Request::is('staff/teachers') ? 'active' : '' }}">
+									<a href="{{ route('teachers.index') }}"> Teachers</a>
+								</li>
+                <li class="#">
+									<a href="#"> Accountants</a>
+								</li>
+                <li class="#">
+									<a href="#"> Administrators</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+          <li class="{{ Request::is('setting/*') ? 'active' : '' }}">
 						<a data-toggle="collapse" href="#settings" class="collapsed" aria-expanded="false">
 							<i class="ti-settings"></i>
 							<p>Settings
@@ -113,16 +134,25 @@
                   <li><a href="{{ route('register') }}">Register</a></li>
                 @else
                   <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <i class="ti-user"></i> {{ Auth::user()->name }} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                    <li> 
+                    @role('student')
+                      <li> 
+                        <a href="{{ route('students.my_profile',Auth::user()->id) }}">
+                          <i class="ti-user"></i>
+                          My Profile
+                        </a>
+                      </li>
+                    @else
+                      <li> 
                         <a href="{{ route('profile.user') }}">
                           <i class="ti-user"></i>
                           My Profile
                         </a>
                       </li>
+                    @endrole
                       <li>
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();

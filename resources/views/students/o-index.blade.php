@@ -19,6 +19,7 @@
 
           <div class="content">
             @if( $students->isEmpty())
+              <br>
               <p class="lead alert alert-warning text-center">
                 No students at the moment
               </p>

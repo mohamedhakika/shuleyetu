@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\UserResetPassword;
 use App\User;
 use Auth;
 use Hash;
@@ -17,59 +18,6 @@ class ProfileController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -99,14 +47,39 @@ class ProfileController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Reset password of student.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
+     public function password_reset($id)
+     {
+         $user = User::find($id);
+         if(!$user){
+             \App::abort('409');
+         } 
+         return view('profile.reset_password',compact('user'));
+     }
+ 
+     /**
+      * Reset password of student.
+      *
+      * @param  int  $id
+      * @return \Illuminate\Http\Response
+      */
+     public function passwordReset(UserResetPassword $request, $id)
+     {
+         $user = User::find($id);
+         if(!$user){
+             \App::abort('409');
+         }
+         $password = Hash::make($request->get('password'));
+         $user->update([
+             'password' => $password,
+         ]);
+         return redirect()->route('user.reset.password',$id)
+            ->with('flash','User password reset successfully');
+     }
+ 
 
 }
