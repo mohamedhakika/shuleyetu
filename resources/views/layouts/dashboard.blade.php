@@ -134,7 +134,7 @@
                   <li><a href="{{ route('register') }}">Register</a></li>
                 @else
                   <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="collapse">
                       <i class="ti-user"></i> {{ Auth::user()->name }} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
@@ -202,6 +202,9 @@
 
     <script>
       $(document).ready(function() {
+        $('li.dropdown').click( function(e){
+          $(this).toggleClass('open');
+        });
         $('.datepicker').datepicker({
           autoclose: true,
           startView: 2,
