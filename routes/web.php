@@ -66,3 +66,11 @@ Route::get('/staff/teachers/{id}/show', 'TeacherController@show')->name('teacher
 Route::get('/staff/teachers/{id}/edit', 'TeacherController@edit')->name('teachers.edit')->middleware(['role:admin']);
 Route::patch('/staff/teachers/{id}/{userId}', 'TeacherController@update')->name('teachers.update')->middleware(['role:admin']);
 Route::delete('/staff/teachers/{id}', 'TeacherController@destroy')->name('teachers.destroy')->middleware(['role:admin']);
+
+Route::get('/staff/teachers/{id}/subjects', 'TeacherController@subjects')->name('teachers.subjects')->middleware(['role:admin']);
+Route::get('/staff/teachers/{id}/add/subjects', 'TeacherController@addSubjects')->name('teachers.addsubjects')->middleware(['role:admin']);
+Route::post('/staff/teachers/add/subject/{id}', 'TeacherController@subjectsAdd')->name('addteachers.subjects')->middleware(['role:admin']);
+Route::delete('/staff/teachers/subject/{id}', 'TeacherController@subjectDestroy')->name('teachersub.destroy')->middleware(['role:admin']);
+
+//api routes
+Route::get('/api/teachers/subjects/{id}', 'TeacherController@getSubjects')->middleware(['role:admin']);

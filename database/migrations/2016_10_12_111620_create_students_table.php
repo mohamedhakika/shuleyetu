@@ -24,8 +24,8 @@ class CreateStudentsTable extends Migration
             $table->date('dob');
             $table->integer('year_admitted');
             $table->string('thumbnail')->nullable();
-            $table->enum('status', [0, 1]);
-            $table->enum('level', [0, 1]);
+            $table->enum('status', [0, 1])->default('1');
+            $table->enum('level', [0, 1])->default('0');
             $table->integer('created_by')->unsigned()->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
             $table->timestamps();

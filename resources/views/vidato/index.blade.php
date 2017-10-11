@@ -75,7 +75,7 @@
 						<select name="name_form" id="name_form" class="form-control selectpicker" style="width: 100%;">
 							<option value="" selected disabled> Select Form </option>
 							@foreach($vidato as $kidato)
-								<option value="{{$kidato->name}}" {{ old("name_form") == $kidato->name ? "selected":"" }}>
+								<option value="{{$kidato->id}}-{{$kidato->name}}" {{ old("name_form") == $kidato->name ? "selected":"" }}>
 									{{ $kidato->name }}
 								</option>
 							@endforeach

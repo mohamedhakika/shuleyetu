@@ -34,16 +34,16 @@
             <label>Form <span style="color:red;"> *</span></label>
             <select name="vidato_id[]" class="form-control selectpicker" multiple="multiple" title="Select Form" data-style="select-with-transition">
               @foreach($vidato as $kidato)
-                  <option value="{{$kidato->id}}" {{ old("vidato_id") == $kidato->name ? "selected":"" }}>
-                    {{ $kidato->name }}
-                  </option>
+								<option value="{{$kidato->id}}" {{ old("vidato_id") == $kidato->name ? "selected":"" }}>
+									{{ $kidato->name }}
+								</option>
               @endforeach
             </select>
           
               @if ($errors->has('vidato_id'))
-                  <span class="help-block">
-                          <strong>{{ $errors->first('vidato_id') }}</strong>
-                  </span>
+								<span class="help-block">
+												<strong>{{ $errors->first('vidato_id') }}</strong>
+								</span>
               @endif
           </div>
 					<div class="category form-category">

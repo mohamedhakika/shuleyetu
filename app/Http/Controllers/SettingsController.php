@@ -34,23 +34,26 @@ class SettingsController extends Controller
 
     public function setClass(VidatoRequest $request)
     {
+        
+        list($vidato_id, $name_form) = explode("-", $request->get('name_form'), 2);
       foreach ($request->input('stream') as $stream) {
           $ipo = Darasa::where([
-                ['name','=', $request->get('name_form')],
+                ['name','=', $name_form],
                 ['year','=', $request->get('year')],
                 ['stream','=', $stream],
                 ['level','=', '0'],
                 ])->first();
-          if(!$ipo){
+          if(! $ipo){
             $darasa = new Darasa();
-            $darasa->name = $request->get('name_form');
+            $darasa->vidato_id = $vidato_id;
+            $darasa->name = $name_form;
             $darasa->level = '0';
             $darasa->stream = $stream;
             $darasa->year = $request->get('year');
             $darasa->save();
           }
       }
-      return redirect()->back()->with('flash', 'Class and streams created successfully');
+      return back()->with('flash', 'Class and streams created successfully');
     }
 
     public function destroyClass($id)

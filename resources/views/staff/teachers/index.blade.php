@@ -46,6 +46,9 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('teachers.destroy',$teacher->id) }}">
                       {{ csrf_field() }}
                       {{ method_field('DELETE') }}
+                        <a href="{{ route('teachers.subjects',$teacher->id) }}" class="btn btn-success btn-fill">
+                          <i class="ti-eye"></i> View subjects
+                        </a>
                         <a href="{{ route('teachers.show',$teacher->id) }}" rel="tooltip" title="View teacher info" class="btn btn-success btn-simple btn-icon">
                           <i class="ti-eye"></i>
                         </a>

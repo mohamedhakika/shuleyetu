@@ -17,7 +17,7 @@ class CreateSubjectsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('vidato_id')->unsigned();
-            $table->enum('level', [0, 1]);
+            $table->enum('level', [0, 1])->default('0');
             $table->integer('created_by')->unsigned()->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
             $table->timestamps();

@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateTeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
+use Carbon\Carbon;
 use App\Teacher;
+use App\Kidato;
+use App\Darasa;
+use App\Subject;
 use App\Role;
-use DB;
 use App\User;
+use DB;
 use Hash;
 use Auth;
 
@@ -189,5 +193,101 @@ class TeacherController extends Controller
         $user->delete();
         return redirect()->route('teachers.index')
                         ->with('flash','Teacher deleted successfully');
+    }
+
+    /**
+    * Get the subjects of the perticular teacher.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function subjects($id)
+    {
+        $teacher = $this->teacher->find($id);
+        if(!$teacher){
+            \App::abort('409');
+        }
+        $t_id = $teacher->id;
+        //return $subjects = $this->teacher->where('id',$id)->with('subjects')->get();
+        $subjects = DB::table('teacher_subjects')
+            ->join('teachers', 'teachers.id', '=', 'teacher_subjects.teacher_id')
+            ->join('classes', 'classes.id', 'teacher_subjects.class_id')
+            ->join('subjects', 'subjects.id', '=', 'teacher_subjects.subject_id')
+            ->select('teacher_subjects.*', 'classes.name as class_name', 'classes.stream', 'subjects.name as subject_name')
+            ->where('teacher_id', $t_id)
+            ->get();
+
+        return view('staff.teachers.subjects', compact('subjects', 'teacher'));
+    }
+
+    public function addSubjects($id)
+    {
+        $teacher = $this->teacher->find($id);
+        if(!$teacher){
+            \App::abort('409');
+        }
+
+        $vidato = Kidato::all('id', 'name');
+        return view('staff.teachers.add-subjects', compact('teacher', 'vidato'));
+    }
+
+    public function subjectsAdd(Request $request, $id)
+    {
+        $teacher = $this->teacher->find($id);
+        if(!$teacher){
+            \App::abort('409');
+        }
+        $request->validate([
+            'subject_id' => 'required',
+            'class_id' => 'required'
+        ]);
+        //dd($request->all());
+        $year = Carbon::now()->year;
+        foreach ($request->input('class_id') as $darasa) {
+            $ipo = DB::table('teacher_subjects')->where([
+                  ['class_id','=', $darasa],
+                  ['subject_id','=', $request->get('subject_id')],
+                  ['year','=', $year],
+                  ])->first();
+            if(!$ipo){
+                DB::table('teacher_subjects')->insert([
+                    'teacher_id' => $id,
+                    'subject_id' => $request->get('subject_id'),
+                    'class_id' => $darasa,
+                    'year' => $year,
+                    'created_by' => Auth::user()->id,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]);
+            }
+        }
+        return back()->with('flash', 'Subject assigned successfully');
+    }
+
+
+    public function getSubjects($id)
+    {
+        $year = Carbon::now()->year;
+        $subjects = Subject::where('vidato_id', $id)->get();
+        if(!$subjects){
+            \App::abort('409');
+        }
+        $classes = Darasa::where([['vidato_id', $id],['year', $year]])->get();
+        if(!$classes){
+            \App::abort('409');
+        }
+
+        return response(['subjects'=>$subjects, 'classes'=>$classes]);
+    }
+
+    public function subjectDestroy($id)
+    {
+        $subject = DB::table('teacher_subjects')->find($id);
+        if(!$subject){
+            \App::abort('409');
+        }
+        DB::table('teacher_subjects')->where('id', $id)->delete();
+        
+        return back()->with('flash', 'Subject removed.');
     }
 }
