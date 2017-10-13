@@ -21,7 +21,7 @@ class CreateClassesTable extends Migration
             $table->string('name');
             $table->enum('level',[0,1])->default('0');
             $table->char('stream', 1);
-			$table->smallInteger ('year');
+			$table->smallInteger('year');
             $table->unique(['name', 'stream', 'year']);
             $table->timestamps();
             $table->foreign('vidato_id')->references('id')->on('vidato')->onDelete('cascade');

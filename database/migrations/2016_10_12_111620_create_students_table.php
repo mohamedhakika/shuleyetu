@@ -18,6 +18,9 @@ class CreateStudentsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('user_id')->unsigned();
+            $table->string('first_name');
+            $table->string('middle_name')->nullable();
+            $table->string('last_name');
             $table->string('reg_no');
             $table->string('address');
             $table->string('mobile_no');

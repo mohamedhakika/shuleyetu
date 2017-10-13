@@ -9,11 +9,12 @@
 		<div class="col-lg-12 col-md-12">
 			<div class="card" style="min-height: 400px">
 				<div class="header">
-					<h4 class="title">New O-level student 
+					<h4 class="title">New <span class="hidden-xs">O-level</span> student 
 					<a href="{{ route('students.o-level') }}" class="btn btn-primary btn-fill pull-right">
-						<i class="fa fa-list"></i> O-level students list
+						<i class="fa fa-list"></i> <span class="hidden-xs">O-level students list</span>
 					</a>
 					</h4>
+          <span class="visible-xs"><br></span>
 				</div>
 				<div class="content">
 					{!! Form::open(['url' => 'students/o-level', 'method' => 'POST']) !!}

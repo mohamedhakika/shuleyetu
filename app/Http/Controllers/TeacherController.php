@@ -241,7 +241,7 @@ class TeacherController extends Controller
             'subject_id' => 'required',
             'class_id' => 'required'
         ]);
-        //dd($request->all());
+
         $year = Carbon::now()->year;
         foreach ($request->input('class_id') as $darasa) {
             $ipo = DB::table('teacher_subjects')->where([
@@ -289,5 +289,66 @@ class TeacherController extends Controller
         DB::table('teacher_subjects')->where('id', $id)->delete();
         
         return back()->with('flash', 'Subject removed.');
+    }
+
+    public function classTeacher($id)
+    {
+        $teacher = $this->teacher->with('classes')->where('id', $id)->first();
+        if(!$teacher){
+            \App::abort('409');
+        }
+        $year = Carbon::now()->year;
+        $classes = Darasa::select('id', 'name', 'stream')
+                            ->where('year', $year)
+                            ->orderBy('name')->orderBy('stream')->get();
+        
+        if(!$classes){
+            \App::abort('409');
+        }
+        return view('staff.teachers.class_teacher', compact('teacher', 'classes'));
+    }
+
+    public function assignClass(Request $request, $id)
+    {
+        $request->validate([
+            'class_id' => 'required'
+        ]);
+        
+        $year = Carbon::now()->year;
+        $ipo = DB::table('class_teacher')->where([
+            ['class_id','=', $request->get('class_id')],
+            ['year','=', $year],
+            ])->first();
+        if(!$ipo){
+          DB::table('class_teacher')->insert([
+              'teacher_id' => $id,
+              'class_id' => $request->get('class_id'),
+              'year' => $year,
+              'created_at' => Carbon::now(),
+              'updated_at' => Carbon::now()
+              ]);
+
+        return back()->with('flash','Class assigned successfully.');
+        }else{
+            $teacher = Teacher::find($ipo->teacher_id);
+            if(!$teacher){
+                \App::abort('409');
+            }
+            $errors = array('class_id' => 'This class is already assigned to '.$teacher->user->name);
+            return redirect()
+                        ->back()->withInput($request->input())
+                      ->withErrors($errors);
+        }
+    }
+
+    public function classTeacherDestroy($id)
+    {
+        $darasa = DB::table('class_teacher')->find($id);
+        if(!$darasa){
+            \App::abort('409');
+        }
+        DB::table('class_teacher')->where('id', $id)->delete();
+        
+        return back()->with('flash', 'Class unassigned successfully.');
     }
 }

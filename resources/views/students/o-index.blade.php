@@ -10,16 +10,17 @@
       <div class="col-lg-12 col-md-12">
         <div class="card" style="min-height: 400px">
         <div class="header">
-					<h4 class="title">O-Level Students List 
+					<h4 class="title"><span class="hidden-xs">O-Level Students List</span> 
 					<a href="{{ route('olevel.create') }}" class="btn btn-primary btn-fill pull-right">
 						<i class="fa fa-plus-circle"></i> Add new student
 					</a>
 					</h4>
+          <span class="visible-xs"><br></span>
 				</div>
 
           <div class="content">
+          <br>
             @if( $students->isEmpty())
-              <br>
               <p class="lead alert alert-warning text-center">
                 No students at the moment
               </p>

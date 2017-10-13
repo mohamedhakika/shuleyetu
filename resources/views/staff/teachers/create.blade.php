@@ -11,7 +11,7 @@
 				<div class="header">
 					<h4 class="title">New Teacher 
 					<a href="{{ route('teachers.index') }}" class="btn btn-primary btn-fill pull-right">
-						<i class="fa fa-list"></i> Teachers list
+						<i class="fa fa-list"></i> <span class="hidden-xs"> Teachers list</span>
 					</a>
 					</h4>
 				</div>

@@ -9,15 +9,16 @@
 		<div class="col-lg-12 col-md-12">
 			<div class="card" style="min-height: 400px">
 				<div class="header">
-					<h4 class="title">Editing teacher
+					<h4 class="title"><i class="ti-user"></i> <span class="hidden-xs">Editing teacher</span>
             <div class="btn-group pull-right">
-            <a href="{{route('teachers.show',$teacher->id)}}" class="btn btn-white"><i class="ti-eye"></i> Show Details </a>
-            <a href="{{route('user.reset.password',$teacher->user->id)}}" class="btn btn-primary"><i class="fa fa-lock"></i> Reset Password </a>
-            <a href="{{route('teachers.index')}}" class="btn btn-info"><i class="fa fa-mail-reply"></i> Back </a>
+            <a href="{{route('teachers.show',$teacher->id)}}" class="btn btn-white"><i class="ti-eye"></i> <span class="hidden-xs"> Show Details</span> </a>
+            <a href="{{route('user.reset.password',$teacher->user->id)}}" class="btn btn-primary"><i class="fa fa-lock"></i> <span class="hidden-xs">Reset Password </span></a>
+            <a href="{{route('teachers.index')}}" class="btn btn-info"><i class="fa fa-mail-reply"></i> <span class="hidden-xs">Back </span></a>
           </div>
 					</h4>
 				</div>
 				<div class="content">
+        <br>
           {!! Form::open(['url' => 'staff/teachers/'.$teacher->id.'/'.$teacher->user->id, 'method' => 'POST']) !!}
             {{ method_field('PATCH') }}
             <div class="row">

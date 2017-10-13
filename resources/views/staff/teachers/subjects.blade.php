@@ -9,16 +9,19 @@
 		<div class="col-lg-12 col-md-12">
 			<div class="card" style="min-height: 400px">
 				<div class="header">
-					<h4 class="title" style="text-transform:capitalize;"><i class="ti-user"></i> Subjects taught by <b>{{ $teacher->user->name }}</b>
+					<h4 class="title" style="text-transform:capitalize;"><span class="hidden-xs"><i class="ti-user"></i>  Subjects taught by <b>{{ $teacher->user->name }}</b></span>
 					
           <div class="btn-group pull-right">
-						<a href="{{route('teachers.addsubjects',$teacher->id)}}" class="btn btn-white"><i class="fa fa-plus-circle"></i> Add subject </a>
-						<a href="{{route('teachers.index')}}" class="btn btn-info"><i class="fa fa-mail-reply"></i> Back </a>
+						<a href="{{route('teachers.addsubjects',$teacher->id)}}" class="btn btn-white" title="Add subject"><i class="fa fa-plus-circle"></i> Add subject </a>
+						<a href="{{route('teachers.index')}}" class="btn btn-info"><i class="fa fa-mail-reply"></i> <span class="hidden-xs"> Back</span> </a>
 					</div>
+          <span class="visible-xs"><br></span>
 					</h4>
 				</div>
 				<div class="content">
+        <br>
         @if(!$subjects->isEmpty())
+        <div class="content table-responsive">
           <table class="table table-hover">
             <thead class="text-primary">
               <tr>
@@ -47,6 +50,7 @@
             @endforeach
             </tbody>
           </table>
+          </div>
           @else
             <br>
             <p class="alert alert-warning text-center">

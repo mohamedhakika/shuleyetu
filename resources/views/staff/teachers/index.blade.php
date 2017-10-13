@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('page-heading')
-    Teachers
+    Teachers List
 @endsection
 
 @section('content')
@@ -10,16 +10,17 @@
       <div class="col-lg-12 col-md-12">
         <div class="card" style="min-height: 400px">
         <div class="header">
-					<h4 class="title">Teachers List 
+					<h4 class="title"><span class="hidden-xs">Teachers List</span> 
 					<a href="{{ route('teachers.create') }}" class="btn btn-primary btn-fill pull-right">
 						<i class="fa fa-plus-circle"></i> Add new teacher
 					</a>
 					</h4>
+          <span class="visible-xs"><br></span>
 				</div>
 
           <div class="content">
+          <br>
             @if( $teachers->isEmpty())
-              <br>
               <p class="lead alert alert-warning text-center">
                 No teachers at the moment
               </p>
@@ -46,9 +47,14 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('teachers.destroy',$teacher->id) }}">
                       {{ csrf_field() }}
                       {{ method_field('DELETE') }}
-                        <a href="{{ route('teachers.subjects',$teacher->id) }}" class="btn btn-success btn-fill">
+                      <div class="btn-group">
+                        <a href="{{ route('teachers.subjects',$teacher->id) }}" class="btn btn-success btn-fill btn-xs">
                           <i class="ti-eye"></i> View subjects
                         </a>
+                        <a href="{{ route('classteacher.index',$teacher->id) }}" class="btn btn-info btn-fill btn-xs">
+                          <i class="ti-eye"></i> Classes
+                        </a>
+                      </div>
                         <a href="{{ route('teachers.show',$teacher->id) }}" rel="tooltip" title="View teacher info" class="btn btn-success btn-simple btn-icon">
                           <i class="ti-eye"></i>
                         </a>

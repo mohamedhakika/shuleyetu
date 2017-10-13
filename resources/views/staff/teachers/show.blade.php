@@ -9,12 +9,12 @@
 		<div class="col-lg-12 col-md-12">
 			<div class="card" style="min-height: 400px">
 				<div class="header">
-					<h4 class="title" style="text-transform:capitalize;"><i class="ti-user"></i>  <b>{{ $teacher->user->name }}</b> Details
+					<h4 class="title" style="text-transform:capitalize;"><i class="ti-user"></i>  <span class="hidden-xs"><b>{{ $teacher->user->name }}</b> Details</span>
 					
           <div class="btn-group pull-right">
-						<a href="{{route('teachers.edit',$teacher->id)}}" class="btn btn-white"><i class="ti-pencil-alt"></i> Edit Details </a>
-						<a href="{{route('user.reset.password',$teacher->user->id)}}" class="btn btn-primary"><i class="ti-lock"></i> Reset Password </a>
-						<a href="{{route('teachers.index')}}" class="btn btn-info"><i class="fa fa-mail-reply"></i> Back </a>
+						<a href="{{route('teachers.edit',$teacher->id)}}" class="btn btn-white"><i class="ti-pencil-alt"></i> <span class="hidden-xs">Edit Details</span> </a>
+						<a href="{{route('user.reset.password',$teacher->user->id)}}" class="btn btn-primary"><i class="ti-lock"></i> <span class="hidden-xs">Reset Password</span> </a>
+						<a href="{{route('teachers.index')}}" class="btn btn-info"><i class="fa fa-mail-reply"></i> <span class="hidden-xs">Back</span> </a>
 					</div>
 					</h4>
 				</div>
