@@ -22,7 +22,7 @@
           <br>
             @if( $teachers->isEmpty())
               <p class="lead alert alert-warning text-center">
-                No teachers at the moment
+                No teacher registered yet.
               </p>
             @else
               <div class="content table-responsive">
@@ -49,7 +49,7 @@
                       {{ method_field('DELETE') }}
                       <div class="btn-group">
                         <a href="{{ route('teachers.subjects',$teacher->id) }}" class="btn btn-success btn-fill btn-xs">
-                          <i class="ti-eye"></i> View subjects
+                          <i class="ti-eye"></i> Subjects
                         </a>
                         <a href="{{ route('classteacher.index',$teacher->id) }}" class="btn btn-info btn-fill btn-xs">
                           <i class="ti-eye"></i> Classes

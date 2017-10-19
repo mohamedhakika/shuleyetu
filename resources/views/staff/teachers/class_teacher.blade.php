@@ -64,7 +64,7 @@
 						<select name="class_id" id="class_id" class="form-control selectpicker" required>
 							<option value="" selected disabled> Select a class </option>
 							@foreach($classes as $darasa)
-								<option value="{{$darasa->id}}" {{ old("class_id") == $darasa->name ? "selected":"" }}>
+								<option value="{{$darasa->id}}" {{ old("class_id") == $darasa->id ? "selected":"" }}>
 									{{ $darasa->name }} {{ $darasa->stream }}
 								</option>
 							@endforeach

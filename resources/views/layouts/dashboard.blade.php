@@ -41,6 +41,7 @@
                 <p>Dashboard</p>
               </a>
             </li>
+            @role('admin')
             <li class="{{ Request::is('students/*') ? 'active' : '' }}">
 						<a data-toggle="collapse" href="#students" class="collapsed" aria-expanded="false">
 							<i class="fa fa-graduation-cap"></i>
@@ -101,6 +102,15 @@
 							</ul>
 						</div>
 					</li>
+          @endrole
+          @role('teacher')
+          <li class="{{ Request::is('assessment/teacher/*') ? 'active' : '' }}">
+            <a href="{{ route('teacher.assessment', Auth::user()->teacher->id) }}">
+              <i class="ti-thought"></i>
+              <p>Assesment</p>
+            </a>
+          </li>
+          @endrole
           </ul>
         </div>
       </div>

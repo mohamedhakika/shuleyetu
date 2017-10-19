@@ -36,7 +36,7 @@ class SettingsController extends Controller
     {
         
         list($vidato_id, $name_form) = explode("-", $request->get('name_form'), 2);
-      foreach ($request->input('stream') as $stream) {
+        foreach ($request->input('stream') as $stream) {
           $ipo = Darasa::where([
                 ['name','=', $name_form],
                 ['year','=', $request->get('year')],
@@ -51,7 +51,7 @@ class SettingsController extends Controller
             $darasa->stream = $stream;
             $darasa->year = $request->get('year');
             $darasa->save();
-          }
+        }
       }
       return back()->with('flash', 'Class and streams created successfully');
     }

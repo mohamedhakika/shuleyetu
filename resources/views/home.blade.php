@@ -105,22 +105,106 @@
         </div>
     </div>
     @endrole
+    
+    @role('teacher')
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div class="icon-big icon-warning text-center">
+                                <i class="ti-stats-up"></i>
+                            </div>
                         </div>
-                    @endif
-
-                    You are logged in!
+                        <div class="col-xs-7">
+                            <div class="numbers">
+                                <p>Total students</p>
+                                {{ Auth::user()->name }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="ti-alert text-warning"></i> 20% lower than last year
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div class="icon-big icon-warning text-center">
+                                <i class="ti-stats-up"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="numbers">
+                                <p>Total students</p>
+                                70,340
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="ti-alert text-warning"></i> 20% lower than last year
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div class="icon-big icon-warning text-center">
+                                <i class="ti-stats-up"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="numbers">
+                                <p>Total students</p>
+                                70,340
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="ti-alert text-warning"></i> 20% lower than last year
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div class="icon-big icon-warning text-center">
+                                <i class="ti-stats-up"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="numbers">
+                                <p>Total students</p>
+                                70,340
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="ti-alert text-warning"></i> 20% lower than last year
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    @endrole
 </div>
 @endsection
