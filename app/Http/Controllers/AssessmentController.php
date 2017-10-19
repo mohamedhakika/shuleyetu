@@ -26,10 +26,10 @@ class AssessmentController extends Controller
 
     public function create($id)
     {
-        $students = Student::distinct()->join('class_student', function($query) use($id)
+        $students = Student::join('class_student', function($query) use($id)
         {
             $query->on('students.id', '=', 'class_student.student_id')->where('class_id', $id);
-        })->orderBy('first_name')->get();
+        })->orderBy('students.first_name')->get();
         
         if(!$students){
             \App::abort('409');
