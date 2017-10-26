@@ -44,23 +44,11 @@ class AssessmentController extends Controller
         $students = Student::join('class_student', function($query) use($id, $term, $year)
         {
             $query->on( 'class_student.student_id', '=', 'students.id')->where('class_id', $id);
-        })->whereNotExists(function($query1) use ($term, $year) {
-            $query1->select(DB::raw('student_id'))
-            ->from('student_tabia')
-            ->whereRaw('student_tabia.student_id = students.id')
-            ->whereRaw("student_tabia.term = $term")
-            ->whereRaw("student_tabia.year = $year");
         })->orderBy('first_name')->get();
 
         $allstudents= Student::join('class_student', function($query) use($id)
         {
             $query->on('class_student.student_id', '=', 'students.id' )->where('class_id', $id);
-        })->whereExists(function($query1) use ($term, $year) {
-            $query1->select(DB::raw('student_id'))
-            ->from('student_tabia')
-            ->whereRaw('student_tabia.student_id = students.id')
-            ->whereRaw("student_tabia.term = $term")
-            ->whereRaw("student_tabia.year = $year");
         })->orderBy('first_name')->get();
         
         if(!$students){
