@@ -41,12 +41,16 @@ class AssessmentController extends Controller
         }
         $term = session('term');
         $year = session('year');
-        $students = Student::join('class_student', function($query) use($id, $term, $year)
+        $students = Student::whereDoesntHave('tabia', function($query1) use($term, $year){
+            $query1->where([['year', $year], ['term', $term]]);
+        })->join('class_student', function($query) use($id, $term, $year)
         {
             $query->on( 'class_student.student_id', '=', 'students.id')->where('class_id', $id);
         })->orderBy('first_name')->get();
 
-        $allstudents= Student::join('class_student', function($query) use($id)
+        $allstudents= Student::whereHas('tabia', function($query1) use($term, $year){
+            $query1->where([['year', $year], ['term', $term]]);
+        })->join('class_student', function($query) use($id)
         {
             $query->on('class_student.student_id', '=', 'students.id' )->where('class_id', $id);
         })->orderBy('first_name')->get();
