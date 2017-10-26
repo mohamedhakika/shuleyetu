@@ -43,23 +43,10 @@ class Student extends Model
         return $this->belongsTo('App\User', 'created_by');
     }
 
-    //Date formated 
-    /**
-     * @param $column
-     * @return null|string
-     */
-    protected function getFormattedDateAttribute($column){
-        if ($this->attributes[$column]) {
-            return Carbon::parse($this->attributes[$column])->diffForHumans();
-        }
-        return null;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getFormattedCreatedAtAttribute() {
-        return $this->getFormattedDateAttribute("created_at");
+    public function tabia()
+    {
+        return $this->belongsToMany('App\Tabia', 'student_tabia', 'student_id', 'tabia_id')
+            ->withPivot('id', 'grade', 'term', 'year');
     }
 
 }

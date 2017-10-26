@@ -54,7 +54,7 @@
                         <a href="{{ route('classteacher.index',$teacher->id) }}" class="btn btn-info btn-fill btn-xs">
                           <i class="ti-eye"></i> Classes
                         </a>
-                      </div>
+                        </div>
                         <a href="{{ route('teachers.show',$teacher->id) }}" rel="tooltip" title="View teacher info" class="btn btn-success btn-simple btn-icon">
                           <i class="ti-eye"></i>
                         </a>

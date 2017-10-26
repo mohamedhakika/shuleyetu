@@ -77,5 +77,10 @@ Route::delete('/staff/teachers/classes/{id}/destroy', 'TeacherController@classTe
 
 Route::get('/assessment/teacher/{id}/index', 'AssessmentController@index')->name('teacher.assessment')->middleware(['role:teacher']);
 Route::get('/assessment/teacher/{id}/add', 'AssessmentController@create')->name('teacher.createassessment');
+Route::get('/assessment/teacher/class/{class_id}/student/{id}/add', 'AssessmentController@add')->name('teacher.addassessment');
+Route::post('/assessment/teacher/class/{class_id}/student/{id}/store', 'AssessmentController@store')->name('teacher.storeassessment');
+Route::post('/assessment/teacher/class/{class_id}', 'AssessmentController@set')->name('teacher.setassessment');
+Route::get('/assessment/teacher/student/{student_id}/{class_id}/class', 'AssessmentController@edit')->name('teacher.editassessment');
+Route::patch('/assessment/teacher/student/{student_id}/{class_id}/class', 'AssessmentController@update')->name('teacher.updateassessment');
 //api routes
 Route::get('/api/teachers/subjects/{id}', 'TeacherController@getSubjects')->middleware(['role:admin']);
