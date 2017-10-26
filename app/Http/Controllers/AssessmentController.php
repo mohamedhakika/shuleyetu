@@ -41,9 +41,9 @@ class AssessmentController extends Controller
         }
         $term = session('term');
         $year = session('year');
-        $students = Student::distinct()->join('class_student', function($query) use($id, $term, $year)
+        $students = Student::join('class_student', function($query) use($id, $term, $year)
         {
-            $query->on('students.id', '=', 'class_student.student_id')->where('class_id', $id);
+            $query->on( 'class_student.student_id', '=', 'students.id')->where('class_id', $id);
         })->whereNotExists(function($query1) use ($term, $year) {
             $query1->select(DB::raw('student_id'))
             ->from('student_tabia')
@@ -52,9 +52,9 @@ class AssessmentController extends Controller
             ->whereRaw("student_tabia.year = $year");
         })->orderBy('first_name')->get();
 
-        $allstudents= Student::distinct()->join('class_student', function($query) use($id)
+        $allstudents= Student::join('class_student', function($query) use($id)
         {
-            $query->on('students.id', '=', 'class_student.student_id')->where('class_id', $id);
+            $query->on('class_student.student_id', '=', 'students.id' )->where('class_id', $id);
         })->whereExists(function($query1) use ($term, $year) {
             $query1->select(DB::raw('student_id'))
             ->from('student_tabia')
@@ -167,7 +167,7 @@ class AssessmentController extends Controller
                 ->update([
                   'grade' => $grade[$index],
                   'updated_at' => Carbon::now()
-                  ]);
+            ]);
         }
 
         return redirect()->back()->with('flash', 'Updated successful.');
