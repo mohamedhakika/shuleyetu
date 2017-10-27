@@ -13,7 +13,12 @@ class Teacher extends Model
 
     public function subjects()
     {
-        return $this->belongsToMany('App\Subject', 'teacher_subjects')->withPivot( 'year');
+        return $this->belongsToMany('App\Subject', 'teacher_subjects')->withPivot( 'id', 'class_id', 'year');
+    }
+
+    public function teaching_classes()
+    {
+        return $this->belongsToMany('App\Darasa', 'teacher_subjects', 'teacher_id','class_id');
     }
 
     public function addedBy()

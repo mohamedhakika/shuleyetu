@@ -110,6 +110,12 @@
               <p>Assesment</p>
             </a>
           </li>
+          <li class="{{ Request::is('sujbects/teacher/*') ? 'active' : '' }}">
+            <a href="{{ route('teacher.subjects', Auth::user()->teacher->id) }}">
+              <i class="ti-book"></i>
+              <p>Subjects</p>
+            </a>
+          </li>
           @endrole
           </ul>
         </div>

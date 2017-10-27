@@ -25,7 +25,7 @@
                         <i class="ti-widget"></i> {{ $darasa->name }} {{ $darasa->stream }}  
                       </td>
                       <td class="col-md-2">
-                        {!! Form::text('year',$year,['class'=>'form-control','placeholder'=>'Year', 'required']) !!}  
+                        {!! Form::text('year', $darasa->year,['class'=>'form-control','placeholder'=>'Year', 'required', 'readonly']) !!}  
                       </td>
                       <td class="col-md-4">
                         {!! Form::select('term', ['1'=>'First term', '2'=>'Second term'], null , ['class'=>'selectpicker form-control', 'title'=>'Select term', 'required']); !!}  

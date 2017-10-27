@@ -82,5 +82,7 @@ Route::post('/assessment/teacher/class/{class_id}/student/{id}/store', 'Assessme
 Route::post('/assessment/teacher/class/{class_id}', 'AssessmentController@set')->name('teacher.setassessment');
 Route::get('/assessment/teacher/student/{student_id}/{class_id}/class', 'AssessmentController@edit')->name('teacher.editassessment');
 Route::patch('/assessment/teacher/student/{student_id}/{class_id}/class', 'AssessmentController@update')->name('teacher.updateassessment');
+
+Route::get('/subjects/teacher/{id}/index', 'StudentSubjectController@index')->name('teacher.subjects');
 //api routes
 Route::get('/api/teachers/subjects/{id}', 'TeacherController@getSubjects')->middleware(['role:admin']);

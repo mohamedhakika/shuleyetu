@@ -49,4 +49,9 @@ class Student extends Model
             ->withPivot('id', 'grade', 'term', 'year');
     }
 
+    public function subjects()
+    {
+        return $this->belongsToMany('App\Subject')->orderBy('name', 'DESC');
+    }
+
 }
