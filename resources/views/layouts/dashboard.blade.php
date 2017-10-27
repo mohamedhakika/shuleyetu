@@ -110,7 +110,7 @@
               <p>Assesment</p>
             </a>
           </li>
-          <li class="{{ Request::is('sujbects/teacher/*') ? 'active' : '' }}">
+          <li class="{{ Request::is('subjects/teacher/*') ? 'active' : '' }}">
             <a href="{{ route('teacher.subjects', Auth::user()->teacher->id) }}">
               <i class="ti-book"></i>
               <p>Subjects</p>

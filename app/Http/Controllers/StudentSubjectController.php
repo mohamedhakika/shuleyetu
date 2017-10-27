@@ -32,19 +32,19 @@ class StudentSubjectController extends Controller
      */
     public function index($id)
     {
-        $teacher = Teacher::with(['teaching_classes', 'subjects'=> function($query)
-                    {
-                        $query->where('year', 2017);
-                    }])->find($id);
-        
-        $masomo = Teacher::join('teacher_subjects', 'teachers.id', '=', 'teacher_subjects.teacher_id')
+        $teacher = Teacher::find($id);
+        if(!$teacher){
+            \App::abort('409');
+        }
+        $year = Carbon::now()->year;
+        $subjects = Teacher::join('teacher_subjects', 'teachers.id', '=', 'teacher_subjects.teacher_id')
                         ->join('subjects', 'teacher_subjects.subject_id', '=', 'subjects.id')
                         ->join('classes', 'teacher_subjects.class_id', '=', 'classes.id')
-                        ->select('teachers.*', 'subjects.id as subjects_id', 'subjects.name as subject_name'
+                        ->select('teachers.id as teachers_id', 'subjects.id as subjects_id', 'subjects.name as subject_name'
                          ,'classes.id as classes_id', 'classes.name as class_name', 'classes.stream as class_stream'
                          ,'teacher_subjects.year as year')
-                        ->where('teachers.id', $id)->where('teacher_subjects.year', 2017)->get();
-        return $masomo;
+                        ->where('teachers.id', $id)->where('teacher_subjects.year', $year)->get();
+        return view('staff.teachers.students.index', compact('teacher', 'subjects'));
     }
 
     /**
