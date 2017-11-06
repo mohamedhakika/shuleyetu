@@ -54,4 +54,9 @@ class Student extends Model
         return $this->belongsToMany('App\Subject')->orderBy('name', 'DESC');
     }
 
+    public function results()
+    {
+        return $this->hasMany('App\Result');
+    }
+
 }

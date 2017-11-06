@@ -6,7 +6,7 @@
 @section('content')
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-12">
+    <div class="col-lg-10 col-lg-offset-1 col-md-12">
       <div class="card" style="min-height: 400px">
         <div class="header card-header-text">
           <h4 class="title">Choose a subject</h4>
@@ -21,7 +21,7 @@
                 <table id="add-me" class="table table-hovered">
                   <tbody class="table-container">  
                     <tr>
-                      <td class="col-md-3">
+                      <td class="col-md-2">
                         <i class="ti-widget"></i> {{ $subject->subject_name }}  
                       </td>
                       <td class="col-md-3">
@@ -30,7 +30,10 @@
                       <td class="col-md-2">
                         {!! Form::text('year', $subject->year,['class'=>'form-control','placeholder'=>'Year', 'required', 'readonly']) !!}  
                       </td>
-                      <td class="col-md-4">
+                      <td class="col-md-3">
+                        {!! Form::select('exam', ['mid_ex'=>'Midterm exam', 'fin_ex'=>'Teminal/Annual exam'], null , ['class'=>'selectpicker form-control', 'title'=>'Select exam', 'required']); !!}  
+                      </td>
+                      <td class="col-md-1">
                         {!! Form::select('term', ['1'=>'First term', '2'=>'Second term'], null , ['class'=>'selectpicker form-control', 'title'=>'Select term', 'required']); !!}  
                       </td>
                       <td class="col-md-1">
@@ -43,7 +46,7 @@
             @endforeach
           @else
             <p class="alert alert-warning text-center">
-            	You are not a class teacher of any class.
+            	No subjects assigned to you yet this year.
             </p>
           @endif
         </div>

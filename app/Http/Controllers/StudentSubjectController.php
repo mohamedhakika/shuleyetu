@@ -36,6 +36,9 @@ class StudentSubjectController extends Controller
         if(!$teacher){
             \App::abort('409');
         }
+        if($id != Auth::user()->teacher->id){
+            \App::abort('409');
+        }
         $year = Carbon::now()->year;
         $subjects = Teacher::join('teacher_subjects', 'teachers.id', '=', 'teacher_subjects.teacher_id')
                         ->join('subjects', 'teacher_subjects.subject_id', '=', 'subjects.id')
@@ -44,6 +47,7 @@ class StudentSubjectController extends Controller
                          ,'classes.id as classes_id', 'classes.name as class_name', 'classes.stream as class_stream'
                          ,'teacher_subjects.year as year')
                         ->where('teachers.id', $id)->where('teacher_subjects.year', $year)->get();
+                        //return $subjects;
         return view('staff.teachers.students.index', compact('teacher', 'subjects'));
     }
 
