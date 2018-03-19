@@ -17,6 +17,8 @@ window.Vue = require('vue');
 
 Vue.component('flash', require('./components/Flash.vue'));
 Vue.component('addsubject', require('./components/Add-subject.vue'));
+Vue.component('addresult', require('./components/Add-result.vue'));
+Vue.component('selectresult', require('./components/Select-result.vue'));
 
 const app = new Vue({
     el: '#app'

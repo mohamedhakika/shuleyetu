@@ -87,3 +87,9 @@ Route::get('/subjects/teacher/{id}/index', 'StudentSubjectController@index')->na
 Route::get('/subjects/teacher/{id}/students', 'StudentSubjectController@getStudents')->name('teacher.subjects.students');
 //api routes
 Route::get('/api/teachers/subjects/{id}', 'TeacherController@getSubjects')->middleware(['role:admin']);
+//result add
+Route::get('/teacher/results/select-students/{id}/teacher', 'ResultController@teacherSelectOne')->name('result.selectone');
+Route::post('/teacher/results/select-students/{teacher_id}/{class_id}/{subject_id}', 'ResultController@setTeacherSelect')->name('result.selectset');
+Route::get('/teacher/results/select-students/{teacher_id}/{class_id}/{subject_id}/select', 'ResultController@teacherSelectStudents')->name('result.selectstudents');
+Route::post('/teacher/add/results/{teacher_id}/{class_id}/{subject_id}', 'ResultController@add')->name('result.add');
+Route::get('/teacher/add/results/{teacher_id}/{class_id}/{subject_id}', 'ResultController@addResult')->name('teacher.addresult');

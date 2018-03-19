@@ -1,11 +1,11 @@
 @extends('layouts.dashboard')
 
 @section('page-heading')
-    Teacher's subjects
+    Selecting subject and class
 @endsection
 @section('content')
 <div class="container-fluid">
-  <div class="row">
+<div class="row">
     <div class="col-lg-10 col-lg-offset-1 col-md-12">
       <div class="card" style="min-height: 400px">
         <div class="header card-header-text">
@@ -17,7 +17,7 @@
             $year = date('Y');
           @endphp
             @foreach($subjects as $subject)
-              {!! Form::open(['route' => ['result.add', $subject->teachers_id, $subject->classes_id, $subject->subjects_id], 'method' => 'POST']) !!}
+              {!! Form::open(['route' => ['result.selectset', $subject->teachers_id, $subject->classes_id, $subject->subjects_id], 'method' => 'POST']) !!}
                 <table id="add-me" class="table table-hovered">
                   <tbody class="table-container">  
                     <tr>

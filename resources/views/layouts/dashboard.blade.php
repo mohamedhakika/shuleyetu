@@ -116,6 +116,27 @@
               <p>Subjects</p>
             </a>
           </li>
+          <li class="{{ Request::is('teacher/results/*') ? 'active' : '' }}">
+						<a data-toggle="collapse" href="#tresult" class="collapsed" aria-expanded="false">
+							<i class="ti-menu"></i>
+							<p>Results
+								<b class="caret"></b>
+							</p>
+						</a>
+						<div class="collapse" id="tresult" role="navigation" aria-expanded="false" style="height: 0px;">
+							<ul class="nav">
+								<li class="{{ Request::is('teacher/results/select-students/*') ? 'active' : '' }}">
+									<a href="{{ route('result.selectone', Auth::user()->teacher->id) }}"> Select students</a>
+								</li>
+                <li class="{{ Request::is('teacher/results/add/*') ? 'active' : '' }}">
+									<a href="#"> Add results</a>
+								</li>
+                <li class="{{ Request::is('teacher/results/view/*') ? 'active' : '' }}">
+									<a href="#"> View results</a>
+								</li>
+							</ul>
+						</div>
+					</li>
           @endrole
           </ul>
         </div>
